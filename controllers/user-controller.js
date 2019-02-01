@@ -22,7 +22,10 @@ router.post('/create', (req, res) => {
           sessionToken: token
         })
       })
-      .catch(err => res.status(500).json({error: err}))
+      .catch(err => {
+        res.status(500).json({error: err})
+        console.log(err); 
+      })
 })
   
 router.post('/login', (req, res) => {
