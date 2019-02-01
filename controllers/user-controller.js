@@ -7,7 +7,9 @@ var jwt = require('jsonwebtoken');
 
 router.post('/create', (req, res) => {
     const userObj = {
-      username: req.body.user.username,
+      firstName:req.body.user.firstName,
+      lastName: req.body.user.lastName,
+      email:req.body.user.email,
       passwordHash: bcrypt.hashSync(req.body.user.password, 10)
     }
     
@@ -26,7 +28,7 @@ router.post('/create', (req, res) => {
 router.post('/login', (req, res) => {
     User.findOne({
       where: {
-        username: req.body.user.username
+        email: req.body.user.email
       }
     })
       .then( user => {

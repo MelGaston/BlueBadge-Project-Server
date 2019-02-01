@@ -1,5 +1,6 @@
 var router = require('express').Router()
 var Movie = require('../db').import('../models/movie');
+require('./user-controller')
 
 /** Add Movie **/
 
@@ -7,8 +8,8 @@ router.post('/', (req, res) => {
     Movie.create({
         movie_id: req.body.movie.movie_id,
         owner_id: req.user.id,
+        // owner_id: req.body.movie.owner_id,
         title: req.body.movie.title,
-        description: req.body.movie.description,
         comment: req.body.movie.comment
     })
       .then(movie => res.status(200).json({
@@ -48,7 +49,7 @@ router.put('/:id', (req, res) => {
         console.log('got error', err);
         res.status(500).json({error: err})
       })
-  })
+})
 
 /** Delete Movie **/
 
